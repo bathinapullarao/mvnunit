@@ -35,6 +35,7 @@ stage('Build')
             } 
 	catch(error)
 	    {
+	    
             echo "The sonar server could not be reached ${error}"
             }
         }
