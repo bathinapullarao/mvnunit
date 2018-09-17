@@ -141,7 +141,7 @@
                         <url>http://192.168.91.49:8081/nexus/content/repositories/snapshots/</url>
                         <groupId>com.test</groupId>
                         <artifactId>spring-boot-test</artifactId>
-                        <version>${project.version}</version>
+                        <version>1.0-SNAPSHOT</version>
                         <file>features.xml</file>
                     </configuration>
                 </execution>
