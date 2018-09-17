@@ -18,7 +18,8 @@ stage('gitCheckout')
 stage('Build')
 	{
         sh "mvn package"
-        }
+	sh "mvn deploy"
+	}
   stage('Junit')
 	{
         try {
