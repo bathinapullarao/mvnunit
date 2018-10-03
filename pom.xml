@@ -117,12 +117,12 @@
         <repository>
             <id>deployment</id>
             <name>Internal Releases</name>
-            <url>http://18.224.96.110:8081/nexus/#view-repositories;releases~browsestorage/</url>
+            <url>http://18.224.96.110:8081/nexus/content/repositories/releases/</url>
         </repository>
         <snapshotRepository>
             <id>deployment</id>
             <name>Internal Snapshot Releases</name>
-            <url>http://18.224.96.110:8081/nexus/#view-repositories;snapshots~browsestorage/</url>
+            <url>http://18.224.96.110:8081/nexus/content/repositories/snapshots/</url>
         </snapshotRepository>
     </distributionManagement>
     </project>
