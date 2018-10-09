@@ -28,7 +28,7 @@ stage('Build')
             echo "The Maven can not perform Junit ${error}"
             }
         }
-  stage('Sonar')
+/**  stage('Sonar')
 	{
         try {
             sh 'mvn sonar:sonar -e |echo "ignore failure"'
@@ -42,7 +42,7 @@ stage('Build')
 	    
             echo "The sonar server could not be reached ${error}"
             }
-        }
+        }  **/
    stage("Prune_deleteUnusedImages")
 	{
         imagePrune(CONTAINER_NAME)
@@ -64,7 +64,6 @@ stage('Build')
         runApp(CONTAINER_NAME, CONTAINER_TAG, DOCKER_HUB_USER, HTTP_PORT)
     }
 
-    
     stage('approvalofQA'){
     input "Deploy to QA?"
     }
@@ -78,13 +77,11 @@ stage('Build')
                                 parameters: [choice(name: 'APPROVE_QA', choices: 'YES\nNO', description: 'Deploy to QA environment?')]
                             if (env.APPROVE_QA == 'YES')
 				    {
-					    
-			            stage('deploy to QA')
+				        stage('deploy to QA')
 					    {
                                             dipQA(CONTAINER_NAME, CONTAINER_TAG, DOCKER_HUB_USER, 8086)
                                             }
-					    	    
-                                env.DPROD = true
+				 env.DPROD = true
                             	    } else 
 				    {
                                 env.DPROD = false
@@ -172,27 +169,21 @@ def imagePrune(containerName){
         sh "docker stop $containerName"
     } catch(error){}
 }
-
 def imageBuild(containerName, tag){
     sh "docker build -t $containerName:$tag  -t $containerName --pull --no-cache ."
     echo "Image build complete"
 }
-
 def pushToImage(containerName, tag, dockerUser, dockerPassword){
     sh "docker login -u $dockerUser -p $dockerPassword"
     sh "docker tag $containerName:$tag $dockerUser/$containerName:$tag"
     sh "docker push $dockerUser/$containerName:$tag"
     echo "Image push complete"
 }
-
 def runApp(containerName, tag, dockerHubUser, httpPort){
     sh "docker pull $dockerHubUser/$containerName"
     sh "docker run -d --rm -p $httpPort:$httpPort --name $containerName $dockerHubUser/$containerName:$tag"
     echo "Application started on port: ${httpPort} (http)"
 }
-
-
-
 def dipQA(containerName, tag, dockerHubUser, httpPort){
     sh "docker pull $dockerHubUser/$containerName"
     sh "docker run -d --rm -p $httpPort:$httpPort --name $containerName $dockerHubUser/$containerName:$tag"
