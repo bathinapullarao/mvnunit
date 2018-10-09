@@ -175,9 +175,9 @@ call(String buildResult) {
   else {
     slackSend color: "danger", message: "Job: ${env.JOB_NAME} with buildnumber ${env.BUILD_NUMBER} its resulat was unclear"	
   }
-**/
-}
 
+}
+**/
 	stage('deploy to QA')
 	{
                 dipQA(CONTAINER_NAME, CONTAINER_TAG, DOCKER_HUB_USER, 8086)
