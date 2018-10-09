@@ -189,7 +189,7 @@ call(String buildResult) {
 	{
         	dipProd(CONTAINER_NAME, CONTAINER_TAG, DOCKER_HUB_USER, 8088)
         }	
-
+}
 def imagePrune(containerName){
     try {
         sh "docker image prune -f"
